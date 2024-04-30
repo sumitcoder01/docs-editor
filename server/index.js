@@ -1,11 +1,41 @@
-import express from 'express'
+import express from 'express';
+import http from 'http';
+import cors from 'cors';
+import { Server } from 'socket.io';
+import auth from './routes/auth.js';
+import connectToMongo from './db.js'
+
 const app = express()
+const server = http.createServer(app);
+const io = new Server(server);
+
+//Connect To MongoDB
+try {
+  connectToMongo();
+  console.log("Connect to Database  Successfully");
+} catch (error) {
+  console.error(error.message);
+}
+
+
 const port = process.env.PORT || 8000
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+//Middlewares
+app.use(cors());
+app.use(express.json());
 
-app.listen(port, () => {
-  console.log(`docs editer server listening on port ${port}`)
-})
+//Available Routes
+app.use('/api/auth', auth);
+
+
+
+io.on('connection', (socket) => {
+  console.log('a user connected');
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+});
+
+server.listen(port, () => {
+  console.log('docs editer backend listening on ' + port);
+});

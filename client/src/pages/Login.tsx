@@ -10,7 +10,7 @@ const Login = () => {
   const loginUser = async (email: string, password: string) => {
     setLoading(true);
     try {
-      const res = await fetch(`${BASE_URL}/auth/loginuser`, {
+      const res = await fetch(`${BASE_URL}/api/auth/loginuser`, {
         method: "POST",
         body: JSON.stringify({ email, password })
       });

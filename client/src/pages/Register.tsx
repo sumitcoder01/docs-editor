@@ -10,7 +10,7 @@ const Register = () => {
   const createUser = async (name: string, email: string, password: string) => {
     setLoading(true);
     try {
-        const res = await fetch(`${BASE_URL}/auth/createuser`, {
+        const res = await fetch(`${BASE_URL}/api/auth/createuser`, {
             method: "POST",
             body: JSON.stringify({ name, email, password })
         });

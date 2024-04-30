@@ -25,7 +25,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const getUser = async (token: string) => {
         try {
-            const res = await fetch(`${BASE_URL}/auth/getuser`, {
+            const res = await fetch(`${BASE_URL}/api/auth/getuser`, {
                 method: "GET",
                 headers: {
                     "auth-token": token
