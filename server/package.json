@@ -1,0 +1,19 @@
+{
+  "name": "docs-editer-server",
+  "version": "1.0.0",
+  "description": "this is docs editer server",
+  "main": "index.js",
+  "type":"module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev":"nodemon --env-file=config.env index.js",
+    "start":"node --env-file=config.env index.js"
+  },
+  "author": "sumit",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "express-validator": "^7.0.1",
+    "mongoose": "^8.3.3"
+  }
+}
