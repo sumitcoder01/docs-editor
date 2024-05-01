@@ -1,7 +1,10 @@
+import { useAuth } from "../context/authContext";
+
 const Home = () => {
+  const {user} =useAuth();
   return (
     <div>
-      Home
+      Home -{user?.updatedAt}
     </div>
   )
 }

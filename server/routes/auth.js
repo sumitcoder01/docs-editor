@@ -17,7 +17,9 @@ router.post("/createuser", [
 //ROUTE 2:Authenticate a User using: POST "/api/auth/login". No login required
 router.post("/login", [
     body("email", "Enter Valid Email").isEmail(),
-    body("password", "Password Cannot be blank").exists(),
+    body("password", "Password must be atleast 5 characters").isLength({
+        min: 5,
+    }),
 ], login);
 
 //ROUTE 3:Get loggedin  User Details using: POST "/api/auth/getuser". login required

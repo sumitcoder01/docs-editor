@@ -4,6 +4,7 @@ import cors from 'cors';
 import { Server } from 'socket.io';
 import auth from './routes/auth.js';
 import connectToMongo from './db.js'
+import bodyParser from 'body-parser';
 
 const app = express()
 const server = http.createServer(app);
@@ -22,7 +23,7 @@ const port = process.env.PORT || 8000
 
 //Middlewares
 app.use(cors());
-app.use(express.json());
+app.use(bodyParser.json());
 
 //Available Routes
 app.use('/api/auth', auth);
