@@ -3,6 +3,11 @@ const { Schema } = mongoose;
 
 const DocumentSchema = new Schema(
   {
+    documentId: {
+      type: String,
+      required: true,
+      unique: true
+    },
     data: {
       type: Object,
       required: true
@@ -13,7 +18,7 @@ const DocumentSchema = new Schema(
     }
   },
   {
-    timestamps: true 
+    timestamps: true
   }
 );
 

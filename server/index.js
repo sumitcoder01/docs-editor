@@ -5,7 +5,8 @@ import { Server } from 'socket.io';
 import auth from './routes/auth.js';
 import connectToMongo from './db.js'
 import bodyParser from 'body-parser';
-import { getDocument, receiveChanges,loadDocument,sendChanges } from './constants/socketEvents.js';
+import { getDocument, receiveChanges, loadDocument, sendChanges, saveDocument } from './constants/socketEvents.js';
+import { getDocumentData, updateDocumentData } from './controllers/documentControllers.js';
 
 const app = express()
 const server = http.createServer(app);
@@ -37,13 +38,17 @@ app.use('/api/auth', auth);
 
 
 io.on('connection', (socket) => {
-  socket.on(getDocument, documentId => {
-    const data = "";
+  socket.on(getDocument, async ({ documentId, authorId }) => {
+    const { data } = await getDocumentData(documentId, authorId);
     socket.join(documentId);
     socket.emit(loadDocument, data);
 
     socket.on(sendChanges, document => {
       socket.broadcast.to(documentId).emit(receiveChanges, document);
+    })
+
+    socket.on(saveDocument, async ({documentId,data}) => {
+      await updateDocumentData(documentId,data);
     })
 
     socket.on('disconnect', () => {

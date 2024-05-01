@@ -6,8 +6,9 @@ import { socket } from "../../lib/socket";
 import { textChangeEvent } from "../../constants/quillEvents";
 import { EmitterSource } from "quill";
 import { Delta } from "quill/core";
-import { getDocument, loadDocument, receiveChanges, sendChanges } from "../../constants/socketEvents";
+import { getDocument, loadDocument, receiveChanges, saveDocument, sendChanges } from "../../constants/socketEvents";
 import '../styles/Editer.css';
+import { useAuth } from "../../context/authContext";
 
 export type EditerProps = {
   documentId: string;
@@ -15,7 +16,9 @@ export type EditerProps = {
 
 export const Editer = ({ documentId }: EditerProps) => {
   const [quill, setQuill] = useState<Quill | null>(null);
+  const [contentChanged, setContentChanged] = useState<boolean>(false);
   const [isConnected, setIsConnected] = useState(true);
+  const { user } = useAuth();
 
   useEffect(() => {
     const initializeQuill = () => {
@@ -28,12 +31,13 @@ export const Editer = ({ documentId }: EditerProps) => {
       quillInstance.disable();
       quillInstance.setText("Loading...")
       setQuill(quillInstance);
-      socket.emit(getDocument, documentId);
+      socket.emit(getDocument, { documentId, authorId: user?.id });
     };
     initializeQuill();
     return () => {
       socket.disconnect();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [documentId])
 
   useEffect(() => {
@@ -41,9 +45,11 @@ export const Editer = ({ documentId }: EditerProps) => {
     const textChangeHandlar = (delta: Delta, _oldContent: Delta, source: EmitterSource) => {
       if (source !== "user") return;
       socket.emit(sendChanges, delta);
+      setContentChanged(prev => !prev)
     }
 
     const receiveChangeHandlar = (document: Delta) => {
+      setContentChanged(prev => !prev)
       quill.setContents(document);
     }
 
@@ -56,7 +62,7 @@ export const Editer = ({ documentId }: EditerProps) => {
 
     quill.on(textChangeEvent, textChangeHandlar)
 
-    socket.on(receiveChanges, receiveChangeHandlar)
+    socket.on(receiveChanges, receiveChangeHandlar);
     socket.once(loadDocument, loadDocumentHandler);
     return () => {
       quill.off(textChangeEvent, textChangeHandlar)
@@ -64,6 +70,17 @@ export const Editer = ({ documentId }: EditerProps) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [quill])
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      socket.emit(saveDocument, ({ documentId, data: quill?.getContents() }));
+    }, 5000)
+    return () => {
+      clearInterval(intervalId);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [contentChanged])
 
   useEffect(() => {
     const handleConnectionStatus = (connected: boolean) => {
@@ -86,8 +103,8 @@ export const Editer = ({ documentId }: EditerProps) => {
 
   return (
     <div className='w-[90%] mx-auto'>
-        {!isConnected && <div className='text-red-500 my-2 text-center'>User is disconnected. Please check your internet connection.</div>}
-        <div className="min-h-screen w-[75%] bg-white shadow-md container" id="editor"></div>
+      {!isConnected && <div className='text-red-500 my-2 text-center'>User is disconnected. Please check your internet connection.</div>}
+      <div className="min-h-screen w-[75%] bg-white shadow-md container" id="editor"></div>
     </div>
   )
 }
