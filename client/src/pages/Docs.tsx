@@ -1,11 +1,10 @@
 import { useParams } from "react-router-dom"
+import { Editer } from "../componets/specific/Editer";
 
 export default function Docs() {
     const { id } = useParams();
     return (
-        <div>
-            Docs : {id}
-        </div>
+        <Editer documentId={id ? id : ""} />
     )
 }
 
