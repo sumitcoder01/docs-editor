@@ -5,7 +5,7 @@ import { Server } from 'socket.io';
 import auth from './routes/auth.js';
 import connectToMongo from './db.js'
 import bodyParser from 'body-parser';
-import { getDocument, receiveChanges } from './constants/socketEvents.js';
+import { getDocument, receiveChanges,loadDocument,sendChanges } from './constants/socketEvents.js';
 
 const app = express()
 const server = http.createServer(app);
@@ -47,7 +47,7 @@ io.on('connection', (socket) => {
     })
 
     socket.on('disconnect', () => {
-      console.log('user disconnected');
+      console.log('user disconnected' + socket.id);
     });
   })
 });
