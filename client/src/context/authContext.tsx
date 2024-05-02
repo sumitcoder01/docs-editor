@@ -20,7 +20,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
 
     const logoutUser = async () => {
-        localStorage.removeItem('auth-token');
+        localStorage.removeItem(authToken);
         setUser(null);
     }
 
