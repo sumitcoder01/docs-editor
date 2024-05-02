@@ -48,9 +48,9 @@ export const Editer = ({ documentId }: EditerProps) => {
       setContentChanged(prev => !prev)
     }
 
-    const receiveChangeHandlar = (document: Delta) => {
+    const receiveChangeHandlar = (delta: Delta) => {
       setContentChanged(prev => !prev)
-      quill.setContents(document);
+      quill.updateContents(delta);
     }
 
     const loadDocumentHandler = (document: Delta) => {

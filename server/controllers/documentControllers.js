@@ -10,7 +10,6 @@ export const getDocumentData = async (id, authorId) => {
                 authorId
             })
         }
-        console.log("get document successfully");
         return document.data;
     } catch (error) {
         console.log("error while geting document")
@@ -21,7 +20,6 @@ export const getDocumentData = async (id, authorId) => {
 export const updateDocumentData = async (id, data) => {
     try {
         await Document.findOneAndUpdate({ documentId: id }, { data });
-        console.log("updated successfully");
     } catch (error) {
         console.log("error while updating document")
     }

@@ -39,16 +39,16 @@ app.use('/api/auth', auth);
 
 io.on('connection', (socket) => {
   socket.on(getDocument, async ({ documentId, authorId }) => {
-    const { data } = await getDocumentData(documentId, authorId);
+    const data = await getDocumentData(documentId, authorId);
     socket.join(documentId);
     socket.emit(loadDocument, data);
 
-    socket.on(sendChanges, document => {
-      socket.broadcast.to(documentId).emit(receiveChanges, document);
+    socket.on(sendChanges, data => {
+      socket.broadcast.to(documentId).emit(receiveChanges, data);
     })
 
-    socket.on(saveDocument, async ({documentId,data}) => {
-      await updateDocumentData(documentId,data);
+    socket.on(saveDocument, async ({ documentId, data }) => {
+      await updateDocumentData(documentId, data);
     })
 
     socket.on('disconnect', () => {
