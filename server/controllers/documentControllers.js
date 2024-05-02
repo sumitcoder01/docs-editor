@@ -37,3 +37,30 @@ export const getDocuments = async (req, res) => {
         res.status(500).json({ success: false, error: "Internal Server Error", documents: [] });
     }
 }
+
+export const updateDocumentTitle = async (req, res) => {
+    try {
+        const updatedItem = await Document.findByIdAndUpdate(req.params.id, { title: req.body.title }, { new: true });
+        if (updatedItem) {
+            res.status(200).json({ success: true, message: "title Updated Successfully" });
+        } else {
+            res.status(404).json({ success: false, error: "title not Updated" });
+        }
+    } catch (error) {
+        console.error(error.message);
+        res.status(401).json({ success: false, error: "Internal Server Error!" });
+    }
+}
+
+export const deleteDocument = async (req, res) => {
+    try {
+        const document = await Document.findByIdAndDelete(req.params.id);
+        if (document) {
+            res.status(200).json({ success: true, message: 'Document deleted successfully' });
+        } else {
+            res.status(404).json({ success: false, error: 'Document not deleted' });
+        }
+    } catch (error) {
+        res.status(500).json({ success: false, error: 'Internal Server Error' });
+    }
+}
