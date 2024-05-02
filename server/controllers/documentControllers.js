@@ -29,7 +29,7 @@ export const updateDocumentData = async (id, data) => {
 export const getDocuments = async (req, res) => {
     try {
         const authorId = req.user.id;
-        const documents = await Document.find({ authorId }).select("-data");
+        const documents = await Document.find({ authorId }).select("-data").sort({ updatedAt: -1 });
         res.json({ success: true, message: "user document successfully fetched", documents });
     }
     catch (error) {

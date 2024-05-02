@@ -4,6 +4,8 @@ import { DocumentCard } from "./DocumentCard";
 import { BASE_URL } from "../../../constants/apiUrl";
 import { DocumentMeta } from "../../../interfaces/document";
 import { authToken } from "../../../constants/authToken";
+import { DocumentNotFound } from "./DocumentNotFound";
+import { DocumentListSkeleton } from "../../loaders/skeletonScreens/DocumentListSkeleton";
 
 export const DocumentList = () => {
     const [loading, setLoading] = useState<boolean>(true);
@@ -39,10 +41,10 @@ export const DocumentList = () => {
                     {documents && documents.map(documentData => (
                         <DocumentCard key={documentData._id} documentData={documentData} />
                     ))}
-                    {documents.length === 0 && <div className="text-red-500">No documents found!</div>}
+                    {documents.length === 0 && <DocumentNotFound/>}
                 </div>
             ) : (
-                <div className="text-gray-600">Loading...</div>
+                <DocumentListSkeleton/>
             )}
         </div>
     );
