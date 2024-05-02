@@ -3,6 +3,7 @@ import { User } from "../interfaces/user";
 import { Loader } from "../componets/loaders/Loader";
 import { BASE_URL } from "../constants/apiUrl";
 import { formattedDate } from "../utils/FormateDate";
+import { authToken } from "../constants/authToken";
 
 const AuthContext = createContext<{
     user?: User | null;
@@ -49,8 +50,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     useEffect(() => {
-        if (localStorage.getItem("auth-token")) {
-            const token = localStorage.getItem("auth-token") || ""
+        if (localStorage.getItem(authToken)) {
+            const token = localStorage.getItem(authToken) || ""
             getUser(token);
         }
         else setLoading(false);

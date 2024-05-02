@@ -8,6 +8,7 @@ import { InputField } from "../componets/shared/InputField";
 import { PasswordField } from "../componets/shared/PasswordField";
 import { Link } from "react-router-dom";
 import { formattedDate } from "../utils/FormateDate";
+import { authToken } from "../constants/authToken";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -28,7 +29,7 @@ const Login = () => {
       });
       const response = await res.json();
       if (response.success) {
-        localStorage.setItem("auth-token", response.authToken);
+        localStorage.setItem(authToken, response.authToken);
         const { _id, name, email, createdAt, updatedAt } = response.user;
         if(setUser){
         setUser({

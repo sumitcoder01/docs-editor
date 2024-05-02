@@ -3,6 +3,7 @@ import http from 'http';
 import cors from 'cors';
 import { Server } from 'socket.io';
 import auth from './routes/auth.js';
+import docs from './routes/docs.js';
 import connectToMongo from './db.js'
 import bodyParser from 'body-parser';
 import { getDocument, receiveChanges, loadDocument, sendChanges, saveDocument } from './constants/socketEvents.js';
@@ -34,6 +35,7 @@ app.use(bodyParser.json());
 
 //Available Routes
 app.use('/api/auth', auth);
+app.use('/api/docs', docs);
 
 
 

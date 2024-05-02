@@ -22,7 +22,7 @@ router.post("/login", [
     }),
 ], login);
 
-//ROUTE 3:Get loggedin  User Details using: POST "/api/auth/getuser". login required
+//ROUTE 3:Get loggedin  User Details using: GET "/api/auth/getuser". login required
 router.get("/getuser", fetchUser, getUser);
 
 export default router;

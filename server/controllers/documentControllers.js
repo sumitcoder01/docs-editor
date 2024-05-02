@@ -5,6 +5,7 @@ export const getDocumentData = async (id, authorId) => {
         let document = await Document.findOne({ documentId: id });
         if (!document) {
             document = await Document.create({
+                title: "untitled - " + Date.now(),
                 documentId: id,
                 data: "",
                 authorId
@@ -28,7 +29,7 @@ export const updateDocumentData = async (id, data) => {
 export const getDocuments = async (req, res) => {
     try {
         const authorId = req.user.id;
-        const documents = await Document.find({ authorId });
+        const documents = await Document.find({ authorId }).select("-data");
         res.json({ success: true, message: "user document successfully fetched", documents });
     }
     catch (error) {

@@ -3,6 +3,10 @@ const { Schema } = mongoose;
 
 const DocumentSchema = new Schema(
   {
+    title: {
+      type: String,
+      required: true
+    },
     documentId: {
       type: String,
       required: true,
