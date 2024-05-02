@@ -1,16 +1,18 @@
 import { useAuth } from "../../context/authContext";
+import { DisplayField } from "../shared/DisplayField";
 
 
 export const ProfileCard = () => {
     const { user } = useAuth();
     return (
-        <div className="bg-white p-4 rounded shadow-md">
-            <h2 className="text-lg font-semibold mb-2">Profile</h2>
+        <div className="p-4 rounded shadow-md">
+            <h2 className="text-lg font-semibold mb-2">User Profile</h2>
+            <hr className="h-2"/>
             <div className="flex flex-col gap-2">
-                <span><strong>Name:</strong> {user?.name}</span>
-                <span><strong>Email:</strong> {user?.email}</span>
-                <span><strong>Created At:</strong> {user?.createdAt}</span>
-                <span><strong>Updated At:</strong> {user?.updatedAt}</span>
+                <DisplayField name={"Name:"} value={user?.name}/>
+                <DisplayField name={"Email:"} value={user?.email}/>
+                <DisplayField name={"Created At:"} value={user?.createdAt}/>
+                <DisplayField name={"Last Modified At:"} value={user?.updatedAt}/>
             </div>
         </div>
     );

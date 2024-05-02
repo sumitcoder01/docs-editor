@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { authToken } from '../constants/authToken';
+import { authToken } from '../constants/authToken.js';
 const JWT_SECRET = process.env.SECRET;
 
 const fetchuser = (req, res, next) => {

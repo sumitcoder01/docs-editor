@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
-import { CreateDocumentButton } from "./CreateDocumentButton"
-import { DocumentCard } from "./DocumentCard"
+import { CreateDocumentButton } from "./CreateDocumentButton";
+import { DocumentCard } from "./DocumentCard";
 import { BASE_URL } from "../../../constants/apiUrl";
 import { DocumentMeta } from "../../../interfaces/document";
 import { authToken } from "../../../constants/authToken";
 
-
 export const DocumentList = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [documents, setDocuments] = useState<DocumentMeta[]>([]);
-
 
     useEffect(() => {
         const getDocumentsData = async () => {
@@ -29,22 +27,23 @@ export const DocumentList = () => {
                 console.log("Internal Server Error!");
             }
             setLoading(false);
-        }
+        };
         getDocumentsData();
-    }, [])
+    }, []);
+
     return (
-        <div>
-            <CreateDocumentButton />
+        <div className="p-4">
+            <div className="mb-3"><CreateDocumentButton /></div>
             {!loading ? (
-                <div className='flex flex-col items-center md:items-start'>
+                <div className="flex flex-col justify-center md:justify-start gap-1 md:gap-2">
                     {documents && documents.map(documentData => (
                         <DocumentCard key={documentData._id} documentData={documentData} />
                     ))}
-                    {documents.length === 0 && <div>No documents found!</div>}
+                    {documents.length === 0 && <div className="text-red-500">No documents found!</div>}
                 </div>
             ) : (
-                <div>Loading...</div>
+                <div className="text-gray-600">Loading...</div>
             )}
         </div>
-    )
-}
+    );
+};

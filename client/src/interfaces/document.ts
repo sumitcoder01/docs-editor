@@ -3,7 +3,7 @@ export interface DocumentMeta {
     title: string;
     documentId: string;
     authorId: string;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: string;
+    updatedAt: string;
 }
 

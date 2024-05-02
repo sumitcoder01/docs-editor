@@ -31,6 +31,7 @@ export const Editer = ({ documentId }: EditerProps) => {
       quillInstance.disable();
       quillInstance.setText("Loading...")
       setQuill(quillInstance);
+      socket.connect();
       socket.emit(getDocument, { documentId, authorId: user?.id });
     };
     initializeQuill();
