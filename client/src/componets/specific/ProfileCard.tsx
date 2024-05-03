@@ -5,7 +5,7 @@ import { DisplayField } from "../shared/DisplayField";
 export const ProfileCard = () => {
     const { user } = useAuth();
     return (
-        <div className="p-4 rounded shadow-md w-[85%]">
+        <div className="p-4 mt-3 rounded shadow-md w-[16rem] md:w-[40rem]">
             <h2 className="text-lg font-semibold mb-2">User Profile</h2>
             <hr className="h-2"/>
             <div className="flex flex-col gap-2">
