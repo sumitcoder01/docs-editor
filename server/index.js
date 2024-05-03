@@ -52,10 +52,6 @@ io.on('connection', (socket) => {
     socket.on(saveDocument, async ({ documentId, data }) => {
       await updateDocumentData(documentId, data);
     })
-
-    socket.on('disconnect', () => {
-      console.log('user disconnected' + socket.id);
-    });
   })
 });
 
