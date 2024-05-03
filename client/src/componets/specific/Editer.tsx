@@ -75,7 +75,7 @@ export const Editer = ({ documentId }: EditerProps) => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       socket.emit(saveDocument, ({ documentId, data: quill?.getContents() }));
-    }, 5000)
+    }, 2000)
     return () => {
       clearInterval(intervalId);
     }

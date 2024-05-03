@@ -10,6 +10,6 @@ export const LogoutButton = () => {
         toast.success("logout user successfully");
     }
     return (
-        <div className="text-2xl" onClick={handleLogoutUser}><LogoutIcon /></div>
+        <div className="text-2xl cursor-pointer" onClick={handleLogoutUser}><LogoutIcon /></div>
     )
 }
