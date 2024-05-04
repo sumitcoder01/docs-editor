@@ -20,7 +20,7 @@ export const DocumentCard = ({ documentData, deleteDocumentById }: DocumentCardP
   const [updatedAt, setUpdatedAt] = useState<string>('');
   const navigate = useNavigate();
 
-  const toggalShow = () => setShow(prev => !prev);
+  const toggelShow = () => setShow(prev => !prev);
 
   useEffect(() => {
     const updateDatesFormate = () => {
@@ -39,13 +39,13 @@ export const DocumentCard = ({ documentData, deleteDocumentById }: DocumentCardP
           <div className='flex items-center justify-start gap-3 md:gap-4 flex-col md:flex-row'>
             <img src={Logo} alt="Logo" className='w-10' />
             <div className="flex flex-col">
-              {!show ? <span onClick={toggalShow} className="text-lg font-semibold cursor-pointer">{title}</span> : <UpdateTitleField id={documentData._id} title={title} toggalShow={toggalShow} setTitle={setTitle} />}
+              {!show ? <span onClick={toggelShow} className="text-lg font-semibold cursor-pointer">{title}</span> : <UpdateTitleField id={documentData._id} title={title} toggelShow={toggelShow} setTitle={setTitle} />}
               <span className="text-sm text-gray-500">Created at: {createdAt}</span>
               <span className="text-sm text-gray-500">Last Modified at: {updatedAt}</span>
             </div>
           </div>
           <div className='flex items-center justify-start mr-3 gap-3'>
-            <div className='cursor-pointer hover:text-gray-500' onClick={() => navigate(`/document/${documentData.documentId}`)}>Edit</div>
+            <div className='cursor-pointer p-2  text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100' onClick={() => navigate(`/document/${documentData.documentId}`)}>Edit</div>
             <DeleteDocumentButton id={documentData._id} deleteDocumentById={deleteDocumentById} />
           </div>
         </div>
