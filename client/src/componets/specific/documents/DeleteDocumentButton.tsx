@@ -1,10 +1,8 @@
-import { Suspense, lazy, useState } from "react";
+import { useState } from "react";
 import { BASE_URL } from "../../../constants/apiUrl";
 import { toast } from "react-toastify";
 import { HypnosisLoader } from "../../loaders/HypnosisLoader";
-import { Loader } from "../../loaders/Loader";
-
-const ConfirmModal = lazy(() => import('../../modals/ConfirmModal'));
+import ConfirmModal from '../../modals/ConfirmModal'
 
 export type DeleteDocumentButtonProps = {
     id: string;
@@ -52,7 +50,7 @@ export const DeleteDocumentButton = ({ id, deleteDocumentById }: DeleteDocumentB
     return (
         <>
             <div className='cursor-pointer p-2 text-gray-900 hover:bg-gray-100 hover:text-red-700 focus:z-10 focus:ring-4 focus:ring-gray-100' onClick={toggleModal}>{loading ? <HypnosisLoader /> : "Delete"}</div>
-            {showModal && <Suspense fallback={<Loader />}>< ConfirmModal handleConfirm={handleConfirm} toggleModal={toggleModal} type={"Delete"} title={"Delete Document"} description={" Are you sure you want to delete this document?"} /></Suspense>}
+            {showModal && <ConfirmModal handleConfirm={handleConfirm} toggleModal={toggleModal} type={"Delete"} title={"Delete Document"} description={" Are you sure you want to delete this document?"} />}
         </>
     )
 }
