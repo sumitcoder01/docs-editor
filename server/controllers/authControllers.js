@@ -57,7 +57,7 @@ export const login = async (req, res) => {
         }
         // remove passoword before sending user information to client
         user.password = ""
-        const authToken = jwt.sign(data, JWT_SECRET);
+        const authToken = jwt.sign(data, JWT_SECRET,{ expiresIn: '10d' });
         res.json({ success: true, user, authToken, message: "user loged In successfully" });
 
     } catch (error) {
