@@ -35,7 +35,7 @@ export const DocumentCard = ({ documentData, deleteDocumentById }: DocumentCardP
   return (
     <div>
       {loading ? <DocumentCardSkeleton /> :
-        <div className="border p-4 w-96 md:w-[40rem] rounded shadow flex items-center justify-between gap-3 md:gap-4 flex-col md:flex-row">
+        <div className="border px-1 py-4 md:px-4 w-72 md:w-[40rem] rounded shadow flex items-center justify-between gap-3 md:gap-4 flex-col md:flex-row">
           <div className='flex items-center justify-start gap-3 md:gap-4 flex-col md:flex-row'>
             <img src={Logo} alt="Logo" className='w-10' />
             <div className="flex flex-col">

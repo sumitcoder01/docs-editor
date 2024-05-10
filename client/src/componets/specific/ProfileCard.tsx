@@ -1,13 +1,12 @@
 import { useAuth } from "../../context/authContext";
 import { DisplayField } from "../shared/DisplayField";
 
-
 export const ProfileCard = () => {
     const { user } = useAuth();
     return (
-        <div className="p-4 mt-3 rounded shadow-md w-[16rem] md:w-[40rem]">
+        <div className="p-4 mt-3 rounded shadow-md w-[16rem] md:w-[40rem] bg-[#e9ecef]">
             <h2 className="text-lg font-semibold mb-2">User Profile</h2>
-            <hr className="h-2"/>
+            <hr className="h-0.5 bg-[#dee2e6]"/>
             <div className="flex flex-col gap-2">
                 <DisplayField name={"Name:"} value={user?.name}/>
                 <DisplayField name={"Email:"} value={user?.email}/>

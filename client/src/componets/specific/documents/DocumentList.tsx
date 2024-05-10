@@ -45,7 +45,7 @@ export const DocumentList = () => {
     }
 
     return (
-        <div className="p-4">
+        <div className="px-1 py-4 md:p-4 min-w-72">
             <div className="mb-3"><CreateDocumentButton /></div>
             {!loading ? (
                 <div className="flex flex-col justify-center md:justify-start gap-1 md:gap-2">
