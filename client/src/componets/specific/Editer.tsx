@@ -103,9 +103,9 @@ export const Editer = ({ documentId }: EditerProps) => {
   }, []);
 
   return (
-      <div className='w-full mx-auto'>
+      <div className='w-[60%] md:w-full md:mx-auto'>
         {!isConnected && <div className='text-red-500 my-2 text-center'>User is disconnected. Please check your internet connection.</div>}
-        <div className="min-h-screen w-[75%] bg-white shadow-md container editer-container" id="editor"></div>
+        <div className="min-h-screen w-[60%] sm:w-[90%] md:w-[80%] bg-white shadow-md md:container editer-container" id="editor"></div>
       </div>
   )
 }

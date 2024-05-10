@@ -10,5 +10,12 @@
     z-index        : 1;
     background     : #f3f3f3;
     border-inline  : none;
+    overflow-x     : scroll;
     border-top     : none;
+}
+
+@media screen and (max-width: 484px) {
+    .editer-container {
+        margin-inline: 10px !important;
+    }
 }
