@@ -1,6 +1,6 @@
 export const DocumentCardSkeleton = () => {
     return (
-        <div className="border p-4 w-96 md:w-[40rem] rounded shadow animate-pulse flex items-center justify-start gap-3 md:gap-4 flex-col md:flex-row">
+        <div className="border px-1 py-4 md:px-4 w-72 md:w-[40rem] rounded shadow animate-pulse flex items-center justify-start gap-3 md:gap-4 flex-col md:flex-row">
             <div className='flex items-center justify-start gap-3 md:gap-4 flex-col md:flex-row'>
                 <div className="w-10 h-10 bg-gray-300 rounded"></div>
                 <div className="flex flex-col">
