@@ -49,7 +49,7 @@ export const DeleteDocumentButton = ({ id, deleteDocumentById }: DeleteDocumentB
 
     return (
         <>
-            <div className='cursor-pointer p-2 text-gray-900 hover:bg-gray-100 hover:text-red-700 focus:z-10 focus:ring-4 focus:ring-gray-100' onClick={toggleModal}>{loading ? <HypnosisLoader /> : "Delete"}</div>
+            <div className='cursor-pointer p-2 text-gray-900 hover:bg-gray-100 hover:text-red-700 focus:z-10 focus:ring-4 focus:ring-gray-100 rounded' onClick={toggleModal}>{loading ? <div className='bg-gray-200'><HypnosisLoader /></div> : "Delete"}</div>
             {showModal && <ConfirmModal handleConfirm={handleConfirm} toggleModal={toggleModal} type={"Delete"} title={"Delete Document"} description={" Are you sure you want to delete this document?"} />}
         </>
     )

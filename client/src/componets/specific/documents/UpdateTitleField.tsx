@@ -2,6 +2,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { BASE_URL } from "../../../constants/apiUrl";
 import { HypnosisLoader } from "../../loaders/HypnosisLoader";
+import { CloseIcon } from "../../icons/CloseIcon";
 
 export type UpdateTitleFieldProps = {
     id: string;
@@ -50,9 +51,11 @@ export const UpdateTitleField = ({ id, title, name = "title", type = "text", pla
 
     return (
         <div className='flex gap-1 md:gap-2 items-center'>
-            <input type={type} name={name} id={name} value={selectetTitle} onChange={e => setSelectedTitle(e.target.value)} placeholder={placeholder} className="bg-gray-50 border border-gray-300 outline-none text-gray-900 sm:text-sm rounded-lg block w-full p-2" required={required} minLength={minLength} />
-            <button onClick={toggelShow} className="bg-green-500 hover:bg-green-300  py-2 px-3 mr-1 rounded  text-sm">close</button>
-            <button onClick={handleUpdateTitle} className="bg-blue-500 hover:bg-blue-300 py-2 px-3 rounded text-sm">{loading ? <HypnosisLoader /> : "update"}</button>
+            <div className="relative">
+                <input type={type} name={name} id={name} value={selectetTitle} onChange={e => setSelectedTitle(e.target.value)} placeholder={placeholder} className="bg-gray-50 border border-gray-300 outline-none text-gray-900 sm:text-sm rounded-lg block w-full py-2 pl-2 pr-7" required={required} minLength={minLength} />
+                <div className="flex items-center absolute right-2 inset-y-0 md:text-lg" onClick={toggelShow}><CloseIcon/></div>
+            </div>
+            <button onClick={handleUpdateTitle} className="bg-blue-500 text-white font-semibold hover:bg-blue-300 py-2 px-3 rounded text-sm">{loading ? <HypnosisLoader /> : "Update"}</button>
         </div>
     )
 }
