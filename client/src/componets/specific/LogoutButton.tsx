@@ -12,7 +12,7 @@ export const LogoutButton = () => {
     return (
         <div className="text-2xl cursor-pointer flex flex-col gap-1 items-center" onClick={handleLogoutUser}>
             <LogoutIcon />
-            <span className="text-sm font-semibold">Logout</span>
+            <span className="text-xs md:text-sm font-semibold">Logout</span>
         </div>
     )
 }

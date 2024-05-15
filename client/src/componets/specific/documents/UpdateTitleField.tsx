@@ -13,10 +13,9 @@ export type UpdateTitleFieldProps = {
     minLength?: number;
     required?: boolean;
     toggelShow: () => void;
-    setTitle: React.Dispatch<React.SetStateAction<string>>;
     updateDocumentTitle: (id: string, title: string) => void;
 }
-export const UpdateTitleField = ({ id, title, name = "title", type = "text", placeholder = "document title..", minLength = 5, required = true, toggelShow, setTitle, updateDocumentTitle }: UpdateTitleFieldProps) => {
+export const UpdateTitleField = ({ id, title, name = "title", type = "text", placeholder = "document title..", minLength = 5, required = true, toggelShow, updateDocumentTitle }: UpdateTitleFieldProps) => {
     const [selectetTitle, setSelectedTitle] = useState<string>(title);
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -32,9 +31,8 @@ export const UpdateTitleField = ({ id, title, name = "title", type = "text", pla
             });
             const response = await res.json();
             if (response.success) {
+                updateDocumentTitle(id, selectetTitle);
                 toast.success(response.message);
-                setTitle(selectetTitle)
-                updateDocumentTitle(id, selectetTitle)
             }
             else {
                 toast.error(response.error);

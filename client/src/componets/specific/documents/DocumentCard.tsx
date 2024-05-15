@@ -16,7 +16,6 @@ export interface DocumentCardProps {
 export const DocumentCard = ({ documentData, deleteDocumentById, updateDocumentTitle }: DocumentCardProps) => {
   const [show, setShow] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
-  const [title, setTitle] = useState<string>('');
   const [createdAt, setCreatedAt] = useState<string>('');
   const [updatedAt, setUpdatedAt] = useState<string>('');
   const navigate = useNavigate();
@@ -27,7 +26,6 @@ export const DocumentCard = ({ documentData, deleteDocumentById, updateDocumentT
     const updateDatesFormate = () => {
       setCreatedAt(formattedDate(documentData.createdAt))
       setUpdatedAt(formattedDate(documentData.updatedAt))
-      setTitle(documentData.title)
     }
     updateDatesFormate();
     setLoading(false);
@@ -40,7 +38,7 @@ export const DocumentCard = ({ documentData, deleteDocumentById, updateDocumentT
           <div className='flex items-center justify-start gap-3 md:gap-4 flex-col md:flex-row'>
             <img src={Logo} alt="Logo" className='w-10' />
             <div className="flex flex-col">
-              {!show ? <span onClick={toggelShow} className="text-lg font-semibold cursor-pointer">{title}</span> : <UpdateTitleField id={documentData._id} title={title} toggelShow={toggelShow} setTitle={setTitle} updateDocumentTitle={updateDocumentTitle} />}
+              {!show ? <span onClick={toggelShow} className="text-lg font-semibold cursor-pointer">{documentData.title}</span> : <UpdateTitleField id={documentData._id} title={documentData.title} toggelShow={toggelShow} updateDocumentTitle={updateDocumentTitle} />}
               <span className="text-sm text-gray-500">Created at: {createdAt}</span>
               <span className="text-sm text-gray-500">Last Modified at: {updatedAt}</span>
             </div>
