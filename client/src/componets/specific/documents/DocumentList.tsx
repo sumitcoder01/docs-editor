@@ -7,8 +7,10 @@ import { authToken } from "../../../constants/authToken";
 import { DocumentNotFound } from "./DocumentNotFound";
 import { DocumentListSkeleton } from "../../loaders/skeletonScreens/DocumentListSkeleton";
 import { toast } from "react-toastify";
+import { SearchBar } from "../../shared/SearchBar";
 
 export const DocumentList = () => {
+    const [searchQuery, setSearchQuery] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(true);
     const [documents, setDocuments] = useState<DocumentMeta[]>([]);
 
@@ -44,15 +46,27 @@ export const DocumentList = () => {
         }
     }
 
+    const updateDocumentTitle = (id: string, title: string) => {
+        const index = documents.findIndex(doc => doc._id === id);
+        if (index !== -1) {
+            const updatedDocuments = [...documents];
+            updatedDocuments[index].title = title;
+            setDocuments(updatedDocuments);
+        }
+    }
+
     return (
         <div className="px-1 py-4 md:p-4 min-w-72">
-            <div className="mb-3"><CreateDocumentButton /></div>
+            <div className="mb-3 flex flex-col md:flex-row gap-6 md:gap-10 items-center">
+                <div className="w-full md:w-auto"><CreateDocumentButton /></div>
+                <div className="w-full md:w-auto"><SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} /></div>
+            </div>
             {!loading ? (
                 <div className="flex flex-col justify-center md:justify-start gap-1 md:gap-2">
-                    {documents && documents.map(documentData => (
-                        <DocumentCard key={documentData._id} documentData={documentData} deleteDocumentById={deleteDocumentById} />
+                    {documents && (searchQuery.length !== 0 ? documents.filter(doc => doc.title.toLowerCase().startsWith(searchQuery.toLowerCase())) : documents).map(documentData => (
+                        <DocumentCard key={documentData._id} documentData={documentData} deleteDocumentById={deleteDocumentById} updateDocumentTitle={updateDocumentTitle} />
                     ))}
-                    {documents.length === 0 && <DocumentNotFound />}
+                    {(searchQuery.length !== 0 ? documents.filter(doc => doc.title.toLowerCase().startsWith(searchQuery.toLowerCase())) : documents).length === 0 && <DocumentNotFound />}
                 </div>
             ) : (
                 <DocumentListSkeleton />
